@@ -18,7 +18,7 @@ export class UserController {
         return this.userService.createUser(userData);
     }
 
-    @Put()
+    @Put(':id')
     async updateUser(
         @Body() userData: Prisma.UserUpdateInput,
         @Param('id') id: string
@@ -26,7 +26,7 @@ export class UserController {
         return this.userService.updateUser({ where: { id: Number(id) }, data: userData })
     }
 
-    @Delete()
+    @Delete(':id')
     async DeleteUser(
         @Param('id') id: string
     ): Promise<UserModel> {
