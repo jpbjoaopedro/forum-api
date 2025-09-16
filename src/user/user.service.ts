@@ -32,12 +32,17 @@ export class UserService {
   }): Promise<User> {
     const { where, data } = params;
 
-    const saltOrRounds = 10;
-    const password = data.password as string;
-    const hashPassword = await bcrypt.hash(password, saltOrRounds);
+    let updateData = {...data}
+    let hashPassword: string;
+    if (data.password) {
+      const saltOrRounds = 10;
+      const password = data.password as string;
+      hashPassword = await bcrypt.hash(password, saltOrRounds);
+      updateData = {...data, password: hashPassword}
+    }
 
     return this.prisma.user.update({
-      data: { ...data, password: hashPassword },
+      data: updateData,
       where,
     });
   }
