@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
+    "paths": {
+      "@prisma/client": ["./generated/prisma"],
+      "@prisma/client/*": ["./generated/prisma/*"]
+    },
     "module": "nodenext",
     "moduleResolution": "nodenext",
     "resolvePackageJsonExports": true,
