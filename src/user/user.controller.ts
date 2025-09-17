@@ -19,14 +19,20 @@ export class UserController {
   @UseGuards(AuthGuard)
   @Get(':id')
   async getUser(@Param('id') id: string): Promise<UserModel | null> {
-    return this.userService.user({ id: Number(id) });
+    return await this.userService.user({ id: Number(id) });
   }
 
+  @UseGuards(AuthGuard)
+  @Get()
+  async getUsers(): Promise<UserModel[] | null> {
+    return await this.userService.users()
+  }
+ 
   @Post()
   async signupUser(
     @Body() userData: Prisma.UserCreateInput,
   ): Promise<UserModel> {
-    return this.userService.createUser(userData);
+    return await this.userService.createUser(userData);
   }
 
   @UseGuards(AuthGuard)
@@ -35,7 +41,7 @@ export class UserController {
     @Body() userData: Prisma.UserUpdateInput,
     @Param('id') id: string,
   ): Promise<UserModel> {
-    return this.userService.updateUser({
+    return await this.userService.updateUser({
       where: { id: Number(id) },
       data: userData,
     });
@@ -44,6 +50,6 @@ export class UserController {
   @UseGuards(AuthGuard)
   @Delete(':id')
   async DeleteUser(@Param('id') id: string): Promise<UserModel> {
-    return this.userService.deleteUser({ id: Number(id) });
+    return await this.userService.deleteUser({ id: Number(id) });
   }
 }

@@ -11,9 +11,13 @@ export class UserService {
   async user(
     userWhereUniqueInput: Prisma.UserWhereUniqueInput,
   ): Promise<User | null> {
-    return this.prisma.user.findUnique({
+    return await this.prisma.user.findUnique({
       where: userWhereUniqueInput,
     });
+  }
+
+  async users(): Promise<User[] | null> {
+    return await this.prisma.user.findMany()
   }
 
   async createUser(data: Prisma.UserCreateInput) {
@@ -21,7 +25,7 @@ export class UserService {
     const password = data.password;
     const hashPassword = await bcrypt.hash(password, saltOrRounds);
 
-    return this.prisma.user.create({
+    return await this.prisma.user.create({
       data: { ...data, password: hashPassword },
     });
   }
@@ -41,14 +45,14 @@ export class UserService {
       updateData = {...data, password: hashPassword}
     }
 
-    return this.prisma.user.update({
+    return await this.prisma.user.update({
       data: updateData,
       where,
     });
   }
 
   async deleteUser(where: Prisma.UserWhereUniqueInput): Promise<User> {
-    return this.prisma.user.delete({
+    return await this.prisma.user.delete({
       where,
     });
   }
