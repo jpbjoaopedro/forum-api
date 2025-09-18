@@ -5,7 +5,7 @@ import { DatabaseModule } from 'src/database/database.module';
 import { AuthModule } from 'src/auth/auth.module';
 
 @Module({
-  imports: [DatabaseModule, forwardRef(() => AuthModule)],
+  imports: [DatabaseModule, AuthModule],
   exports: [UserService],
   controllers: [UserController],
   providers: [UserService],
