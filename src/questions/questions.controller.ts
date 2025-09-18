@@ -14,7 +14,7 @@ export class QuestionsController {
     @Body() createQuestionDto: CreateQuestionDto,
     @Request() req: any
   ) {
-    return this.questionsService.create(createQuestionDto, req.sub);
+    return this.questionsService.create(createQuestionDto, req);
   }
 
   @Get()
