@@ -12,11 +12,11 @@ import { DatabaseModule } from 'src/database/database.module';
     JwtModule.register({
       global: true,
       secret: process.env.SECRET_KEY,
-      signOptions: { expiresIn: '24h' }
-    })
+      signOptions: { expiresIn: '24h' },
+    }),
   ],
   exports: [AuthGuard],
   controllers: [AuthController],
   providers: [AuthService, AuthGuard],
 })
-export class AuthModule { }
+export class AuthModule {}

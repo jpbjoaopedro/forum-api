@@ -6,11 +6,11 @@ import { PrismaService } from 'src/database/prisma.service';
 @Injectable()
 export class QuestionsService {
   @Inject()
-  private readonly prisma: PrismaService
+  private readonly prisma: PrismaService;
 
   async create(createQuestionDto: CreateQuestionDto, req: any) {
     return await this.prisma.questions.create({
-      data: { ...createQuestionDto, userId: req.sub.sub }
+      data: { ...createQuestionDto, userId: req.sub.sub },
     });
   }
 
@@ -21,10 +21,10 @@ export class QuestionsService {
         user: {
           select: {
             name: true,
-            email: true
-          }
-        }
-      }
+            email: true,
+          },
+        },
+      },
     });
   }
 
@@ -36,10 +36,10 @@ export class QuestionsService {
         user: {
           select: {
             name: true,
-            email: true
-          }
-        }
-      }
+            email: true,
+          },
+        },
+      },
     });
   }
 

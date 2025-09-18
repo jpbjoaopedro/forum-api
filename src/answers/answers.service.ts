@@ -8,19 +8,23 @@ export class AnswersService {
   @Inject()
   private readonly prisma: PrismaService;
 
-  async create(createAnswerDto: CreateAnswerDto, userId: any, questionId: number) {
+  async create(
+    createAnswerDto: CreateAnswerDto,
+    userId: any,
+    questionId: number,
+  ) {
     const newAnswer = {
       body: createAnswerDto.body,
       user: {
         connect: { id: userId.sub },
       },
       question: {
-        connect: { id: questionId }
-      }
-    }
+        connect: { id: questionId },
+      },
+    };
     return await this.prisma.answers.create({
-      data: newAnswer
-    })
+      data: newAnswer,
+    });
   }
 
   async findAll() {
@@ -33,8 +37,8 @@ export class AnswersService {
 
   async update(id: number, updateAnswerDto: UpdateAnswerDto) {
     return await this.prisma.answers.update({
-      where: {id},
-      data: updateAnswerDto
+      where: { id },
+      data: updateAnswerDto,
     });
   }
 

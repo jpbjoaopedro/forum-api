@@ -18,13 +18,13 @@ export class UserService {
         email: true,
         name: true,
         createdAt: true,
-        updatedAt: true
-      }
+        updatedAt: true,
+      },
     });
   }
 
   async users(): Promise<User[] | null> {
-    return await this.prisma.user.findMany()
+    return await this.prisma.user.findMany();
   }
 
   async createUser(data: Prisma.UserCreateInput) {
@@ -43,13 +43,13 @@ export class UserService {
   }): Promise<User> {
     const { where, data } = params;
 
-    let updateData = {...data}
+    let updateData = { ...data };
     let hashPassword: string;
     if (data.password) {
       const saltOrRounds = 10;
       const password = data.password as string;
       hashPassword = await bcrypt.hash(password, saltOrRounds);
-      updateData = {...data, password: hashPassword}
+      updateData = { ...data, password: hashPassword };
     }
 
     return await this.prisma.user.update({

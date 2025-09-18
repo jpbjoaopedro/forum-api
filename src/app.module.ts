@@ -7,7 +7,13 @@ import { AnswersModule } from './answers/answers.module';
 import { APP_PIPE } from '@nestjs/core';
 
 @Module({
-  imports: [AuthModule, UserModule, DatabaseModule, QuestionsModule, AnswersModule],
+  imports: [
+    AuthModule,
+    UserModule,
+    DatabaseModule,
+    QuestionsModule,
+    AnswersModule,
+  ],
   providers: [
     {
       provide: APP_PIPE,
@@ -15,4 +21,4 @@ import { APP_PIPE } from '@nestjs/core';
     },
   ],
 })
-export class AppModule { }
+export class AppModule {}

@@ -18,12 +18,12 @@ import { UpdateUserDto } from './dto/update-user.dto';
 
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService) { }
+  constructor(private readonly userService: UserService) {}
 
   @UseGuards(AuthGuard)
   @Get(':id')
   async getUser(
-    @Param('id', ParseIntPipe) id: number
+    @Param('id', ParseIntPipe) id: number,
   ): Promise<Omit<UserModel, 'password'> | null> {
     return await this.userService.user({ id });
   }
@@ -31,9 +31,9 @@ export class UserController {
   @UseGuards(AuthGuard)
   @Get()
   async getUsers(): Promise<UserModel[] | null> {
-    return await this.userService.users()
+    return await this.userService.users();
   }
- 
+
   @Post()
   async signupUser(
     @Body(new ValidationPipe()) userData: CreateUserDto,
@@ -45,7 +45,7 @@ export class UserController {
   @Patch(':id')
   async updateUser(
     @Body(new ValidationPipe()) userData: UpdateUserDto,
-    @Param('id', ParseIntPipe) id: number
+    @Param('id', ParseIntPipe) id: number,
   ): Promise<UserModel> {
     return await this.userService.updateUser({
       where: { id },
